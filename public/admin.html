@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Admin Panel</title>
+
+<style>
+body{
+    font-family:Arial;
+    background:#111;
+    color:#fff;
+    padding:20px;
+}
+.login,.panel{
+    max-width:800px;
+    margin:auto;
+    background:#222;
+    padding:20px;
+    border-radius:10px;
+}
+input,button{
+    padding:10px;
+    margin:5px 0;
+    width:100%;
+}
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:15px;
+}
+th,td{
+    border:1px solid #444;
+    padding:8px;
+    font-size:14px;
+}
+th{background:#333}
+.good{color:#1abc9c}
+.bad{color:#e74c3c}
+#error{color:#e74c3c}
+</style>
+</head>
+
+<body>
+
+<div class="login" id="loginBox">
+    <h2>🔐 Admin Giriş</h2>
+
+    <form id="loginForm">
+        <input id="username" placeholder="Username">
+        <input id="password" type="password" placeholder="Password">
+        <button type="submit">Daxil ol</button>
+        <div id="error"></div>
+    </form>
+</div>
+
+<div class="panel" id="panel" style="display:none">
+    <h2>📊 Giriş Logları</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Tarix</th>
+                <th>Kod</th>
+                <th>Status</th>
+                <th>IP</th>
+                <th>Cihaz</th>
+            </tr>
+        </thead>
+        <tbody id="logTable"></tbody>
+    </table>
+</div>
+
+<script>
+document.getElementById("loginForm").addEventListener("submit",function(e){
+    e.preventDefault();
+
+    const user=document.getElementById("username").value;
+    const pass=document.getElementById("password").value;
+
+    fetch("/admin-login",{
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({username:user,password:pass})
+    })
+    .then(r=>r.json())
+    .then(d=>{
+        if(d.success){
+            document.getElementById("loginBox").style.display="none";
+            document.getElementById("panel").style.display="block";
+            loadLogs();
+        }else{
+            document.getElementById("error").innerText="❌ Login səhvdir";
+        }
+    });
+});
+
+function loadLogs(){
+    fetch("/logs")
+    .then(r=>r.json())
+    .then(logs=>{
+        const t=document.getElementById("logTable");
+        t.innerHTML="";
+        logs.reverse().forEach(l=>{
+            const tr=document.createElement("tr");
+            tr.innerHTML=`
+                <td>${l.time}</td>
+                <td>${l.code}</td>
+                <td class="${l.valid?'good':'bad'}">
+                    ${l.valid?'Düz':'Səhv'}
+                </td>
+                <td>${l.ip||'-'}</td>
+                <td>${l.agent}</td>
+            `;
+            t.appendChild(tr);
+        });
+    });
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tiflis Kazino</title>
+
+<style>
+@keyframes floatUp {
+    0% { transform: translateY(0); opacity:0; }
+    20% { opacity:0.8; }
+    100% { transform: translateY(-120vh); opacity:0; }
+}
+
+@keyframes glow {
+    0% { box-shadow: 0 0 10px #f5c542; }
+    50% { box-shadow: 0 0 30px #f5c542; }
+    100% { box-shadow: 0 0 10px #f5c542; }
+}
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:'Segoe UI', Arial, sans-serif;
+    background: radial-gradient(circle at top, #1e3c72, #000);
+    overflow:hidden;
+    height:100vh;
+    color:#fff;
+}
+
+/* 🔥 ARXA CANLI NÖQTƏLƏR */
+.background span{
+    position:absolute;
+    bottom:-20px;
+    border-radius:50%;
+    background:rgba(245,197,66,0.9);
+    animation: floatUp linear infinite;
+}
+
+.background span:nth-child(odd){
+    background:rgba(255,255,255,0.8);
+}
+
+.container{
+    position:relative;
+    z-index:2;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:15px;
+}
+
+/* 🎰 JACKPOT */
+.jackpot{
+    position:absolute;
+    top:15px;
+    left:50%;
+    transform:translateX(-50%);
+    background:linear-gradient(90deg,#f5c542,#ffd86b);
+    color:#000;
+    padding:10px 20px;
+    border-radius:30px;
+    font-weight:bold;
+    font-size:14px;
+    animation: glow 3s infinite;
+    z-index:3;
+}
+
+/* MAIN BOX */
+.box{
+    background:rgba(0,0,0,0.88);
+    padding:30px 22px;
+    width:100%;
+    max-width:380px;
+    border-radius:20px;
+    text-align:center;
+    animation: glow 3s infinite;
+}
+
+.logo{
+    font-size:28px;
+    color:#f5c542;
+    font-weight:bold;
+}
+
+.subtitle{
+    opacity:0.85;
+    margin-bottom:12px;
+    font-size:14px;
+}
+
+.notice{
+    background:#f5c542;
+    color:#000;
+    padding:10px;
+    border-radius:10px;
+    font-weight:bold;
+    margin-bottom:14px;
+    font-size:14px;
+}
+
+input{
+    width:100%;
+    padding:14px;
+    border-radius:12px;
+    border:none;
+    text-align:center;
+    font-size:16px;
+}
+
+button{
+    width:100%;
+    padding:14px;
+    border-radius:12px;
+    border:none;
+    font-size:16px;
+    margin-top:12px;
+    cursor:pointer;
+}
+
+.confirm{
+    background:#f5c542;
+    font-weight:bold;
+}
+
+.buttons{
+    display:none;
+    margin-top:10px;
+}
+
+.fastloto{
+    background:#1abc9c;
+}
+
+.chcplay{
+    background:#3498db;
+    color:#fff;
+}
+
+.error{
+    color:#ff6b6b;
+    margin-top:10px;
+    font-size:14px;
+}
+
+.contact{
+    margin-top:18px;
+    display:flex;
+    gap:10px;
+}
+
+.contact a{
+    flex:1;
+    padding:12px;
+    border-radius:14px;
+    text-decoration:none;
+    font-weight:bold;
+    color:#fff;
+    font-size:14px;
+}
+
+.whatsapp{ background:#25D366; }
+.telegram{ background:#0088cc; }
+
+.footer-text{
+    margin-top:14px;
+    font-size:12px;
+    opacity:0.85;
+}
+</style>
+</head>
+
+<body>
+
+<!-- 🔥 Arxa nöqtələr -->
+<div class="background">
+<script>
+for(let i=0;i<35;i++){
+    document.write(
+        `<span style="
+        left:${Math.random()*100}%;
+        width:${5+Math.random()*7}px;
+        height:${5+Math.random()*7}px;
+        animation-duration:${10+Math.random()*10}s;
+        animation-delay:${Math.random()*5}s;"></span>`
+    );
+}
+</script>
+</div>
+
+<!-- 🎰 JACKPOT -->
+<div class="jackpot">
+    🎰 LIVE JACKPOT: <span id="jackpot">200 ₼</span>
+</div>
+
+<div class="container">
+<div class="box">
+    <div class="logo">🎰 Tiflis Kazino</div>
+    <div class="subtitle">Eksklüziv kazino </div>
+
+    <div class="notice">🔑 Kodu əldə etmək üçün bizimlə əlaqə saxlayın</div>
+
+    <input id="code" placeholder="11-22-33-44-55-66-77">
+    <button class="confirm" onclick="checkCode()">GİRİŞİ AÇ</button>
+
+    <div class="error" id="error"></div>
+
+    <div class="buttons" id="buttons">
+        <button class="fastloto" onclick="goFastloto()">Fastloto</button>
+        <button class="chcplay" onclick="goChcplay()">CHCPlay</button>
+    </div>
+
+    <div class="contact">
+        <a class="whatsapp" href="https://wa.me/994703064070" target="_blank">WhatsApp</a>
+        <a class="telegram" href="https://t.me/USERNAME" target="_blank">Telegram</a>
+    </div>
+
+    <div class="footer-text">
+        💎 Canlı oyunlar • Böyük uduşlar • Etibarlı
+    </div>
+</div>
+</div>
+
+<script>
+// 🔐 Kod yoxlama
+function checkCode(){
+    const input = document.getElementById("code");
+    if(!input) return;
+
+    const raw = input.value;
+    const cleaned = raw.replace(/-/g,"");
+    const valid = /^\d{14}$/.test(cleaned);
+
+    // LOG GÖNDƏR
+    fetch("/log",{
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({
+            code: cleaned,
+            valid: valid,
+            agent: navigator.userAgent
+        })
+    });
+
+    document.getElementById("error").innerText =
+        valid ? "" : "❌ Kod səhvdir";
+
+    document.getElementById("buttons").style.display =
+        valid ? "block" : "none";
+}
+
+// 🎰 Jackpot DOM hazır olanda
+document.addEventListener("DOMContentLoaded",()=>{
+    const jackpotEl = document.getElementById("jackpot");
+    if(!jackpotEl) return;
+
+    let jackpot = 200;
+    setInterval(()=>{
+        if(jackpot < 500){
+            jackpot += Math.floor(Math.random()*3)+1;
+            if(jackpot > 500) jackpot = 500;
+            jackpotEl.innerText = jackpot + " ₼";
+        }
+    },2000);
+});
+
+function goFastloto(){ location.href="https://fastloto365.com"; }
+function goChcplay(){ location.href="https://chcplay1.net"; }
+</script>
+
+
+
+</body>
+</html>
