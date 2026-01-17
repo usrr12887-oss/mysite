@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <title>Depozit et</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #0f172a;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .box {
+            background: #020617;
+            padding: 20px;
+            border-radius: 12px;
+            width: 100%;
+            max-width: 400px;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        .card {
+            border: 1px solid #334155;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+        input, button {
+            width: 100%;
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 8px;
+            border: none;
+        }
+        input {
+            background: #020617;
+            color: #fff;
+            border: 1px solid #334155;
+        }
+        button {
+            background: #22c55e;
+            color: #000;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #16a34a;
+        }
+        .note {
+            font-size: 13px;
+            color: #94a3b8;
+            margin-top: 10px;
+        }
+        .error {
+            color: #ef4444;
+            font-size: 13px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="box">
+    <h2>💳 Depozit et</h2>
+
+    <div class="card">
+        <b>Kart sahibi:</b> SƏNİN ADIN<br>
+        <b>Kart nömrəsi:</b> 4169 **** **** 1234<br>
+        <b>Minimum depozit:</b> 5 AZN
+    </div>
+
+    <form id="depositForm">
+        <input 
+            type="number" 
+            id="amount" 
+            name="amount" 
+            placeholder="Depozit məbləği (AZN)" 
+            min="5" 
+            required
+        >
+
+        <div id="amountError" class="error"></div>
+
+        <input 
+            type="file" 
+            name="receipt" 
+            accept="image/*" 
+            required
+        >
+
+        <button type="submit">Qəbzi göndər</button>
+    </form>
+
+    <div class="note">
+        Pulu göndərdikdən sonra qəbzin şəklini yüklə.  
+        Təsdiqdən sonra sənə **kod veriləcək**.
+    </div>
+</div>
+
+<script>
+document.getElementById("depositForm").addEventListener("submit", async function(e){
+    e.preventDefault();
+
+    const amount = Number(document.getElementById("amount").value);
+    const errorEl = document.getElementById("amountError");
+
+    if(amount < 5){
+        errorEl.innerText = "Minimum depozit məbləği 5 AZN-dir.";
+        return;
+    }
+
+    errorEl.innerText = "";
+
+    const formData = new FormData(this);
+
+    const res = await fetch("/deposit", {
+        method: "POST",
+        body: formData
+    });
+
+    if(res.ok){
+        alert("Qəbz göndərildi. Təsdiq gözləyin.");
+        this.reset();
+    } else {
+        alert("Xəta baş verdi.");
+    }
+});
+</script>
+
+</body>
+</html>
