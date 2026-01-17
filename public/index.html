@@ -3,276 +3,270 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tiflis Kazino</title>
+<title>Tiflis Kazino — Canlı</title>
 
 <style>
-@keyframes floatUp {
-    0% { transform: translateY(0); opacity:0; }
-    20% { opacity:0.8; }
-    100% { transform: translateY(-120vh); opacity:0; }
+@keyframes float {
+  0%{transform:translateY(0) rotate(0);opacity:0}
+  15%{opacity:1}
+  100%{transform:translateY(-150vh) rotate(360deg);opacity:0}
+}
+@keyframes neon{
+  0%{box-shadow:0 0 10px #ffd700}
+  50%{box-shadow:0 0 40px #ff0000}
+  100%{box-shadow:0 0 10px #ffd700}
+}
+@keyframes slide{
+  0%{transform:translateY(120%);opacity:0}
+  15%{opacity:1}
+  85%{opacity:1}
+  100%{transform:translateY(-140%);opacity:0}
+}
+@keyframes pulse{
+  0%{transform:scale(1)}
+  50%{transform:scale(1.05)}
+  100%{transform:scale(1)}
 }
 
-@keyframes glow {
-    0% { box-shadow: 0 0 10px #f5c542; }
-    50% { box-shadow: 0 0 30px #f5c542; }
-    100% { box-shadow: 0 0 10px #f5c542; }
-}
-
-*{
-    box-sizing:border-box;
-}
-
+*{box-sizing:border-box}
 body{
-    margin:0;
-    font-family:'Segoe UI', Arial, sans-serif;
-    background: radial-gradient(circle at top, #1e3c72, #000);
-    overflow:hidden;
-    height:100vh;
-    color:#fff;
+  margin:0;height:100vh;overflow:hidden;
+  font-family:system-ui,Arial;
+  background:radial-gradient(circle at top,#3b0000,#000);
+  color:#fff;
 }
 
-/* 🔥 ARXA CANLI NÖQTƏLƏR */
+/* BACKGROUND */
 .background span{
-    position:absolute;
-    bottom:-20px;
-    border-radius:50%;
-    background:rgba(245,197,66,0.9);
-    animation: floatUp linear infinite;
+  position:absolute;bottom:-60px;
+  font-size:32px;
+  animation:float linear infinite;
+  text-shadow:0 0 18px gold;
 }
 
-.background span:nth-child(odd){
-    background:rgba(255,255,255,0.8);
+/* TOP */
+.top{
+  position:fixed;top:8px;left:50%;
+  transform:translateX(-50%);
+  display:flex;gap:8px;z-index:9;
+}
+.stat{
+  background:rgba(0,0,0,.8);
+  border:1px solid gold;
+  border-radius:14px;
+  padding:8px 12px;
+  font-size:12px;font-weight:800;
 }
 
-.container{
-    position:relative;
-    z-index:2;
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    padding:15px;
-}
-
-/* 🎰 JACKPOT */
+/* JACKPOT */
 .jackpot{
-    position:absolute;
-    top:15px;
-    left:50%;
-    transform:translateX(-50%);
-    background:linear-gradient(90deg,#f5c542,#ffd86b);
-    color:#000;
-    padding:10px 20px;
-    border-radius:30px;
-    font-weight:bold;
-    font-size:14px;
-    animation: glow 3s infinite;
-    z-index:3;
+  position:fixed;top:52px;left:50%;
+  transform:translateX(-50%);
+  background:linear-gradient(90deg,#ffd700,#ff9800);
+  color:#000;
+  border-radius:30px;
+  padding:8px 16px;
+  font-weight:900;
+  animation:neon 3s infinite;
+  z-index:9;
 }
 
-/* MAIN BOX */
-.box{
-    background:rgba(0,0,0,0.88);
-    padding:30px 22px;
-    width:100%;
-    max-width:380px;
-    border-radius:20px;
-    text-align:center;
-    animation: glow 3s infinite;
+/* TICKERS */
+.winner,.geo{
+  position:fixed;left:50%;
+  transform:translateX(-50%);
+  background:linear-gradient(90deg,#ffd700,#ff9800);
+  color:#000;
+  border-radius:30px;
+  padding:10px 18px;
+  font-weight:900;
+  font-size:14px;
+  animation:slide 5s infinite;
+  z-index:9;
 }
+.winner{bottom:14px}
+.geo{bottom:58px;font-size:13px}
 
-.logo{
-    font-size:28px;
-    color:#f5c542;
-    font-weight:bold;
+/* MAIN */
+.container{
+  height:100vh;display:flex;
+  align-items:center;justify-content:center;
+  padding:14px;position:relative;z-index:2;
 }
+.card{
+  width:100%;max-width:420px;
+  background:rgba(0,0,0,.93);
+  border-radius:26px;
+  padding:26px 20px;
+  animation:neon 3s infinite;
+}
+.logo{text-align:center;font-size:30px;font-weight:900;color:#ffd700}
+.sub{text-align:center;font-size:13px;opacity:.85;margin-bottom:10px}
 
-.subtitle{
-    opacity:0.85;
-    margin-bottom:12px;
-    font-size:14px;
+.urgency{
+  background:#ff2e2e;color:#fff;
+  padding:10px;border-radius:14px;
+  text-align:center;font-weight:900;
+  animation:pulse 1.2s infinite;
 }
 
 .notice{
-    background:#f5c542;
-    color:#000;
-    padding:10px;
-    border-radius:10px;
-    font-weight:bold;
-    margin-bottom:14px;
-    font-size:14px;
+  background:#ffd700;color:#000;
+  padding:12px;border-radius:14px;
+  text-align:center;font-weight:900;margin-top:10px;
 }
-
 input{
-    width:100%;
-    padding:14px;
-    border-radius:12px;
-    border:none;
-    text-align:center;
-    font-size:16px;
+  width:100%;margin-top:10px;
+  padding:16px;border-radius:16px;
+  border:none;font-size:18px;text-align:center;
 }
-
 button{
-    width:100%;
-    padding:14px;
-    border-radius:12px;
-    border:none;
-    font-size:16px;
-    margin-top:12px;
-    cursor:pointer;
+  width:100%;margin-top:12px;
+  padding:16px;border-radius:16px;
+  border:none;font-size:18px;
+  font-weight:900;
 }
+.main{background:#ffd700}
+.actions{display:none}
+.fast{background:#1abc9c}
+.chc{background:#3498db;color:#fff}
 
-.confirm{
-    background:#f5c542;
-    font-weight:bold;
+.trust{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:8px;margin-top:12px;font-size:12px;
 }
-
-.buttons{
-    display:none;
-    margin-top:10px;
-}
-
-.fastloto{
-    background:#1abc9c;
-}
-
-.chcplay{
-    background:#3498db;
-    color:#fff;
-}
-
-.error{
-    color:#ff6b6b;
-    margin-top:10px;
-    font-size:14px;
+.trust div{
+  background:rgba(255,255,255,.06);
+  border-radius:12px;padding:8px;text-align:center;
 }
 
 .contact{
-    margin-top:18px;
-    display:flex;
-    gap:10px;
+  display:flex;gap:10px;margin-top:14px;
 }
-
 .contact a{
-    flex:1;
-    padding:12px;
-    border-radius:14px;
-    text-decoration:none;
-    font-weight:bold;
-    color:#fff;
-    font-size:14px;
+  flex:1;padding:14px;border-radius:18px;
+  text-align:center;text-decoration:none;
+  font-weight:900;color:#fff;
 }
-
-.whatsapp{ background:#25D366; }
-.telegram{ background:#0088cc; }
-
-.footer-text{
-    margin-top:14px;
-    font-size:12px;
-    opacity:0.85;
-}
+.whatsapp{background:#25D366}
+.telegram{background:#0088cc}
 </style>
 </head>
 
 <body>
 
-<!-- 🔥 Arxa nöqtələr -->
+<!-- FLOATING SYMBOLS -->
 <div class="background">
 <script>
-for(let i=0;i<35;i++){
-    document.write(
-        `<span style="
-        left:${Math.random()*100}%;
-        width:${5+Math.random()*7}px;
-        height:${5+Math.random()*7}px;
-        animation-duration:${10+Math.random()*10}s;
-        animation-delay:${Math.random()*5}s;"></span>`
-    );
+const symbols=["7","🍒","🍋","🍉","🔔","💎","🍀"];
+for(let i=0;i<55;i++){
+  const s=symbols[Math.floor(Math.random()*symbols.length)];
+  document.write(`<span style="
+    left:${Math.random()*100}%;
+    animation-duration:${8+Math.random()*14}s;
+    animation-delay:${Math.random()*6}s;
+  ">${s}</span>`);
 }
 </script>
 </div>
 
-<!-- 🎰 JACKPOT -->
-<div class="jackpot">
-    🎰 LIVE JACKPOT: <span id="jackpot">200 ₼</span>
+<div class="top">
+  <div class="stat">🟢 Online: <span id="online">156</span></div>
+  <div class="stat">⚡ Çıxarış: 1–5 dəq</div>
+  <div class="stat">🎰 Oyun: 420+</div>
 </div>
 
+<div class="jackpot">🎰 JACKPOT: <span id="jp">300 ₼</span></div>
+<div class="geo" id="geo">📍 Bakıdan 3 nəfər qoşuldu</div>
+<div class="winner" id="win">Sevinc 500 ₼ qazandı 💰</div>
+
 <div class="container">
-<div class="box">
-    <div class="logo">🎰 Tiflis Kazino</div>
-    <div class="subtitle">Eksklüziv kazino </div>
+<div class="card">
+  <div class="logo">🎰 Guven Kazino</div>
+  <div class="sub">Mobil • Canlı • Agressiv Uduş</div>
 
-    <div class="notice">🔑 Kodu əldə etmək üçün bizimlə əlaqə saxlayın</div>
+  
+  <div class="notice">🔑 Giriş kodu üçün bizimlə əlaqə saxla</div>
+  <input id="code" placeholder="11-22-33-44-55-66-77">
+  <button class="main" onclick="check()">İNDİ BAŞLA</button>
 
-    <input id="code" placeholder="11-22-33-44-55-66-77">
-    <button class="confirm" onclick="checkCode()">GİRİŞİ AÇ</button>
+  <div class="actions" id="actions">
+    <button class="fast">Fastloto</button>
+    <button class="chc">CHCPlay</button>
+  </div>
 
-    <div class="error" id="error"></div>
+  <div class="trust">
+    <div>🔒 Etibarlı</div>
+    <div>💳 Ani ödəniş</div>
+    <div>🎯 Canlı diler</div>
+  </div>
 
-    <div class="buttons" id="buttons">
-        <button class="fastloto" onclick="goFastloto()">Fastloto</button>
-        <button class="chcplay" onclick="goChcplay()">CHCPlay</button>
-    </div>
-
-    <div class="contact">
-        <a class="whatsapp" href="https://wa.me/994703064070" target="_blank">WhatsApp</a>
-        <a class="telegram" href="https://t.me/USERNAME" target="_blank">Telegram</a>
-    </div>
-
-    <div class="footer-text">
-        💎 Canlı oyunlar • Böyük uduşlar • Etibarlı
-    </div>
+  <div class="contact">
+    <a class="whatsapp" href="https://wa.me/994">WhatsApp</a>
+    <a class="telegram" href="#">Telegram</a>
+  </div>
 </div>
 </div>
 
 <script>
-// 🔐 Kod yoxlama
-function checkCode(){
-    const input = document.getElementById("code");
-    if(!input) return;
+/* 50 AD */
+const names=[
+"Sevinc","Orxan","Murad","Aysel","Elvin","Nicat","Rauf","Kamal","Emil","Samir",
+"Ramil","Vüsal","Anar","Tural","Emin","İlqar","Cavid","Rəşad","Elşad","Aydın",
+"Farid","Nurlan","Zaur","Şahin","Eldar","Ruslan","Kamran","Arif","Mahir","Rövşən",
+"Fuad","Yusif","Vaqif","Təbriz","Sadiq","Ramin","Araz","Fəridə","Ləman","Günel",
+"Nigar","Leyla","Zəhra","Xədicə","Aytac","Zülfiyyə","Şəbnəm","Mələk","İradə","Səbinə"
+];
 
-    const raw = input.value;
-    const cleaned = raw.replace(/-/g,"");
-    const valid = /^\d{14}$/.test(cleaned);
+const cities=["Bakı","Gəncə","Sumqayıt","Mingəçevir","Şəki","Lənkəran","Quba","Xaçmaz","Şirvan","Naxçıvan"];
 
-    // LOG GÖNDƏR
-    fetch("/log",{
-        method:"POST",
-        headers:{"Content-Type":"application/json"},
-        body:JSON.stringify({
-            code: cleaned,
-            valid: valid,
-            agent: navigator.userAgent
-        })
-    });
+/* ONLINE */
+let online=156;
+setInterval(()=>{
+  online+=Math.floor(Math.random()*7-3);
+  if(online<110) online=120;
+  document.getElementById("online").innerText=online;
+},2200);
 
-    document.getElementById("error").innerText =
-        valid ? "" : "❌ Kod səhvdir";
+/* JACKPOT */
+let jp=300;
+setInterval(()=>{
+  jp+=Math.floor(Math.random()*6)+1;
+  if(jp>1200) jp=1200;
+  document.getElementById("jp").innerText=jp+" ₼";
+},2000);
 
-    document.getElementById("buttons").style.display =
-        valid ? "block" : "none";
+/* WINNER */
+setInterval(()=>{
+  const n=names[Math.floor(Math.random()*names.length)];
+  const m=[100,150,200,300,500,750,1000][Math.floor(Math.random()*7)];
+  document.getElementById("win").innerText=`${n} ${m} ₼ qazandı 💰`;
+},5000);
+
+/* GEO FAKE */
+setInterval(()=>{
+  const c=cities[Math.floor(Math.random()*cities.length)];
+  const x=Math.floor(Math.random()*4)+1;
+  document.getElementById("geo").innerText=`📍 ${c}dan ${x} nəfər qoşuldu`;
+},4500);
+
+/* TIMER */
+let t=300;
+setInterval(()=>{
+  t--; if(t<0) t=300;
+  const m=String(Math.floor(t/60)).padStart(2,"0");
+  const s=String(t%60).padStart(2,"0");
+  document.getElementById("timer").innerText=`${m}:${s}`;
+},1000);
+
+/* CODE */
+function check(){
+  const v=document.getElementById("code").value.replace(/-/g,"");
+  if(/^\d{14}$/.test(v)){
+    document.getElementById("actions").style.display="block";
+  }
 }
-
-// 🎰 Jackpot DOM hazır olanda
-document.addEventListener("DOMContentLoaded",()=>{
-    const jackpotEl = document.getElementById("jackpot");
-    if(!jackpotEl) return;
-
-    let jackpot = 200;
-    setInterval(()=>{
-        if(jackpot < 500){
-            jackpot += Math.floor(Math.random()*3)+1;
-            if(jackpot > 500) jackpot = 500;
-            jackpotEl.innerText = jackpot + " ₼";
-        }
-    },2000);
-});
-
-function goFastloto(){ location.href="https://fastloto365.com"; }
-function goChcplay(){ location.href="https://chcplay1.net"; }
 </script>
-
-
 
 </body>
 </html>
