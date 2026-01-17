@@ -3,71 +3,148 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Admin Panel</title>
+<title>Dior Kazino – Admin Panel</title>
 
 <style>
+*{box-sizing:border-box}
 body{
-    font-family:Arial;
-    background:#111;
+    margin:0;
+    min-height:100vh;
+    font-family:Arial,Helvetica,sans-serif;
+    background:radial-gradient(circle at top,#0f172a,#020617);
     color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+.container{
+    width:100%;
+    max-width:900px;
     padding:20px;
 }
-.login,.panel{
-    max-width:800px;
-    margin:auto;
-    background:#222;
-    padding:20px;
-    border-radius:10px;
+.box{
+    background:rgba(2,6,23,.95);
+    border:1px solid rgba(34,197,94,.25);
+    border-radius:18px;
+    padding:24px;
+    box-shadow:0 0 40px rgba(34,197,94,.25);
+}
+.logo{
+    text-align:center;
+    font-size:26px;
+    font-weight:bold;
+    letter-spacing:2px;
+    color:#22c55e;
+    margin-bottom:6px;
+}
+.subtitle{
+    text-align:center;
+    font-size:13px;
+    color:#94a3b8;
+    margin-bottom:20px;
 }
 input,button{
-    padding:10px;
-    margin:5px 0;
     width:100%;
+    padding:12px;
+    margin-top:10px;
+    border-radius:10px;
+    border:none;
+    font-size:14px;
+}
+input{
+    background:#020617;
+    border:1px solid #334155;
+    color:#fff;
+}
+input:focus{
+    outline:none;
+    border-color:#22c55e;
+}
+button{
+    background:linear-gradient(135deg,#22c55e,#16a34a);
+    color:#020617;
+    font-weight:bold;
+    cursor:pointer;
+}
+button:hover{opacity:.9}
+#error{
+    margin-top:10px;
+    color:#ef4444;
+    text-align:center;
+    font-size:13px;
+}
+
+/* PANEL */
+.panel{
+    display:none;
 }
 table{
     width:100%;
     border-collapse:collapse;
-    margin-top:15px;
+    margin-top:16px;
+    font-size:13px;
 }
 th,td{
-    border:1px solid #444;
-    padding:8px;
-    font-size:14px;
+    border:1px solid #334155;
+    padding:10px;
+    text-align:center;
 }
-th{background:#333}
-.good{color:#1abc9c}
-.bad{color:#e74c3c}
-#error{color:#e74c3c}
+th{
+    background:#020617;
+    color:#22c55e;
+}
+.good{color:#22c55e;font-weight:bold}
+.bad{color:#ef4444;font-weight:bold}
+
+.footer{
+    margin-top:16px;
+    text-align:center;
+    font-size:11px;
+    color:#475569;
+}
 </style>
 </head>
 
 <body>
 
-<div class="login" id="loginBox">
-    <h2>🔐 Admin Giriş</h2>
+<div class="container">
 
-    <form id="loginForm">
-        <input id="username" placeholder="Username">
-        <input id="password" type="password" placeholder="Password">
-        <button type="submit">Daxil ol</button>
-        <div id="error"></div>
-    </form>
-</div>
+    <!-- LOGIN -->
+    <div class="box login" id="loginBox">
+        <div class="logo">🎰 DIOR ADMIN</div>
+        <div class="subtitle">İdarəetmə paneli</div>
 
-<div class="panel" id="panel" style="display:none">
-    <h2>📊 Giriş Logları</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>Tarix</th>
-                <th>Kod</th>
-                <th>Status</th>
-                <th>IP</th>
-                <th>Cihaz</th>
-            </tr>
-        </thead>
-        <tbody id="logTable"></tbody>
-    </table>
+        <form id="loginForm">
+            <input id="username" placeholder="Admin adı">
+            <input id="password" type="password" placeholder="Şifrə">
+            <button type="submit">Daxil ol</button>
+            <div id="error"></div>
+        </form>
+    </div>
+
+    <!-- PANEL -->
+    <div class="box panel" id="panel">
+        <div class="logo">📊 Giriş Logları</div>
+        <div class="subtitle">Sistem aktivliyi</div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Tarix</th>
+                    <th>Kod</th>
+                    <th>Status</th>
+                    <th>IP</th>
+                    <th>Cihaz</th>
+                </tr>
+            </thead>
+            <tbody id="logTable"></tbody>
+        </table>
+
+        <div class="footer">
+            © 2026 Dior Kazino – Admin Panel
+        </div>
+    </div>
+
 </div>
 
 <script>
