@@ -1,197 +1,275 @@
 <!DOCTYPE html>
 <html lang="az">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Dior Kazino – Admin Panel</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zümrüd Admin | Control Center</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #00ffa3;
+            --gold: #ffcf4d;
+            --danger: #ff4d4d;
+            --dark-bg: #0a0c0b;
+            --card-bg: #141816;
+        }
 
-<style>
-*{box-sizing:border-box}
-body{
-    margin:0;
-    min-height:100vh;
-    font-family:Arial,Helvetica,sans-serif;
-    background:radial-gradient(circle at top,#0f172a,#020617);
-    color:#fff;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-}
-.container{
-    width:100%;
-    max-width:900px;
-    padding:20px;
-}
-.box{
-    background:rgba(2,6,23,.95);
-    border:1px solid rgba(34,197,94,.25);
-    border-radius:18px;
-    padding:24px;
-    box-shadow:0 0 40px rgba(34,197,94,.25);
-}
-.logo{
-    text-align:center;
-    font-size:26px;
-    font-weight:bold;
-    letter-spacing:2px;
-    color:#22c55e;
-    margin-bottom:6px;
-}
-.subtitle{
-    text-align:center;
-    font-size:13px;
-    color:#94a3b8;
-    margin-bottom:20px;
-}
-input,button{
-    width:100%;
-    padding:12px;
-    margin-top:10px;
-    border-radius:10px;
-    border:none;
-    font-size:14px;
-}
-input{
-    background:#020617;
-    border:1px solid #334155;
-    color:#fff;
-}
-input:focus{
-    outline:none;
-    border-color:#22c55e;
-}
-button{
-    background:linear-gradient(135deg,#22c55e,#16a34a);
-    color:#020617;
-    font-weight:bold;
-    cursor:pointer;
-}
-button:hover{opacity:.9}
-#error{
-    margin-top:10px;
-    color:#ef4444;
-    text-align:center;
-    font-size:13px;
-}
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: var(--dark-bg);
+            color: white;
+            margin: 0;
+            display: flex;
+        }
 
-/* PANEL */
-.panel{
-    display:none;
-}
-table{
-    width:100%;
-    border-collapse:collapse;
-    margin-top:16px;
-    font-size:13px;
-}
-th,td{
-    border:1px solid #334155;
-    padding:10px;
-    text-align:center;
-}
-th{
-    background:#020617;
-    color:#22c55e;
-}
-.good{color:#22c55e;font-weight:bold}
-.bad{color:#ef4444;font-weight:bold}
+        /* Sidebar */
+        .sidebar {
+            width: 260px;
+            height: 100vh;
+            background: #000;
+            border-right: 1px solid var(--primary);
+            position: fixed;
+            padding: 20px;
+        }
 
-.footer{
-    margin-top:16px;
-    text-align:center;
-    font-size:11px;
-    color:#475569;
-}
-</style>
+        .admin-logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 22px;
+            color: var(--primary);
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 15px;
+        }
+
+        .nav-link {
+            padding: 15px;
+            color: #aaa;
+            text-decoration: none;
+            display: block;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            background: rgba(0, 255, 163, 0.1);
+            color: var(--primary);
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: 260px;
+            width: calc(100% - 260px);
+            padding: 30px;
+        }
+
+        /* Stats Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 15px;
+            border-left: 4px solid var(--primary);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+
+        .stat-card h4 { margin: 0; font-size: 12px; color: #888; text-transform: uppercase; }
+        .stat-card p { margin: 10px 0 0; font-size: 24px; font-weight: bold; color: var(--gold); }
+
+        /* Table Style */
+        .data-table {
+            width: 100%;
+            background: var(--card-bg);
+            border-radius: 15px;
+            border-collapse: collapse;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .data-table th, .data-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #222;
+        }
+
+        .data-table th { background: #1a1e1c; color: var(--primary); font-size: 13px; }
+        
+        .status-badge {
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        .pending { background: rgba(255, 207, 77, 0.2); color: var(--gold); }
+        .approved { background: rgba(0, 255, 163, 0.2); color: var(--primary); }
+
+        .btn-action {
+            padding: 8px 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12px;
+            margin-right: 5px;
+        }
+
+        .btn-approve { background: var(--primary); color: #000; font-weight: bold; }
+        .btn-reject { background: var(--danger); color: white; }
+
+        /* Modal / Receipt View */
+        .receipt-link { color: var(--primary); text-decoration: underline; cursor: pointer; }
+
+        .section { display: none; }
+        .active-section { display: block; }
+    </style>
 </head>
-
 <body>
 
-<div class="container">
+<div class="sidebar">
+    <div class="admin-logo">ZÜMRÜD ADMIN</div>
+    <div class="nav-link active" onclick="showSection('dashboard')">🏠 Dashboard</div>
+    <div class="nav-link" onclick="showSection('deposits')">💰 Depozit Sorğuları</div>
+    <div class="nav-link" onclick="showSection('withdrawals')">🏧 Çıxarış Sorğuları</div>
+    <div class="nav-link" onclick="showSection('users')">👥 Müştərilər</div>
+    <div class="nav-link" style="margin-top: 50px; color: var(--danger);">🔒 Çıxış</div>
+</div>
 
-    <!-- LOGIN -->
-    <div class="box login" id="loginBox">
-        <div class="logo">🎰 DIOR ADMIN</div>
-        <div class="subtitle">İdarəetmə paneli</div>
+<div class="main-content">
+    
+    <div id="dashboard" class="section active-section">
+        <h2>Sistem Statistikası</h2>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h4>Ümumi Depozit</h4>
+                <p>12,450 AZN</p>
+            </div>
+            <div class="stat-card">
+                <h4>Gözləyən Sorğu</h4>
+                <p>8 ədəd</p>
+            </div>
+            <div class="stat-card">
+                <h4>Aktiv Müştəri</h4>
+                <p>1,240</p>
+            </div>
+            <div class="stat-card" style="border-left-color: var(--gold);">
+                <h4>Ümumi Çıxarış</h4>
+                <p>5,800 AZN</p>
+            </div>
+        </div>
 
-        <form id="loginForm">
-            <input id="username" placeholder="Admin adı">
-            <input id="password" type="password" placeholder="Şifrə">
-            <button type="submit">Daxil ol</button>
-            <div id="error"></div>
-        </form>
-    </div>
-
-    <!-- PANEL -->
-    <div class="box panel" id="panel">
-        <div class="logo">📊 Giriş Logları</div>
-        <div class="subtitle">Sistem aktivliyi</div>
-
-        <table>
+        <h3>Son Əməliyyatlar</h3>
+        <table class="data-table">
             <thead>
                 <tr>
+                    <th>Müştəri</th>
+                    <th>Məbləğ</th>
                     <th>Tarix</th>
-                    <th>Kod</th>
                     <th>Status</th>
-                    <th>IP</th>
-                    <th>Cihaz</th>
                 </tr>
             </thead>
-            <tbody id="logTable"></tbody>
+            <tbody>
+                <tr>
+                    <td>elvin_99</td>
+                    <td>100 AZN</td>
+                    <td>17.01.2026</td>
+                    <td><span class="status-badge approved">Tamamlandı</span></td>
+                </tr>
+                <tr>
+                    <td>royal_bet</td>
+                    <td>500 AZN</td>
+                    <td>17.01.2026</td>
+                    <td><span class="status-badge pending">Gözləyir</span></td>
+                </tr>
+            </tbody>
         </table>
+    </div>
 
-        <div class="footer">
-            © 2026 Dior Kazino – Admin Panel
-        </div>
+    <div id="deposits" class="section">
+        <h2>Gözləyən Depozitlər</h2>
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Müştəri</th>
+                    <th>Məbləğ</th>
+                    <th>Çek</th>
+                    <th>Kod Təyin Et</th>
+                    <th>Əməliyyat</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>murad_v</td>
+                    <td>250 AZN</td>
+                    <td><span class="receipt-link" onclick="alert('Çek şəkli açılır...')">çeki_gör.jpg</span></td>
+                    <td><input type="text" placeholder="Kod yaz (məs: ZM-12)"></td>
+                    <td>
+                        <button class="btn-action btn-approve" onclick="approve(this)">Təsdiqlə</button>
+                        <button class="btn-action btn-reject">Rədd et</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div id="withdrawals" class="section">
+        <h2>Çıxarış Tələbləri</h2>
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Müştəri</th>
+                    <th>Məbləğ</th>
+                    <th>Kart Nömrəsi</th>
+                    <th>Oyun Kodu</th>
+                    <th>Əməliyyat</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>azer_88</td>
+                    <td>150 AZN</td>
+                    <td>4127 0000 9999 8888</td>
+                    <td>ZM-9941</td>
+                    <td>
+                        <button class="btn-action btn-approve">Ödənildi</button>
+                        <button class="btn-action btn-reject">Ləğv et</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 
 </div>
 
 <script>
-document.getElementById("loginForm").addEventListener("submit",function(e){
-    e.preventDefault();
+    function showSection(id) {
+        document.querySelectorAll('.section').forEach(s => s.classList.remove('active-section'));
+        document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+        
+        document.getElementById(id).classList.add('active-section');
+        event.currentTarget.classList.add('active');
+    }
 
-    const user=document.getElementById("username").value;
-    const pass=document.getElementById("password").value;
-
-    fetch("/admin-login",{
-        method:"POST",
-        headers:{"Content-Type":"application/json"},
-        body:JSON.stringify({username:user,password:pass})
-    })
-    .then(r=>r.json())
-    .then(d=>{
-        if(d.success){
-            document.getElementById("loginBox").style.display="none";
-            document.getElementById("panel").style.display="block";
-            loadLogs();
-        }else{
-            document.getElementById("error").innerText="❌ Login səhvdir";
+    function approve(btn) {
+        const row = btn.parentElement.parentElement;
+        const codeInput = row.querySelector('input').value;
+        
+        if(!codeInput) {
+            alert("Zəhmət olmasa müştəri üçün OYUN KODU təyin edin!");
+            return;
         }
-    });
-});
-
-function loadLogs(){
-    fetch("/logs")
-    .then(r=>r.json())
-    .then(logs=>{
-        const t=document.getElementById("logTable");
-        t.innerHTML="";
-        logs.reverse().forEach(l=>{
-            const tr=document.createElement("tr");
-            tr.innerHTML=`
-                <td>${l.time}</td>
-                <td>${l.code}</td>
-                <td class="${l.valid?'good':'bad'}">
-                    ${l.valid?'Düz':'Səhv'}
-                </td>
-                <td>${l.ip||'-'}</td>
-                <td>${l.agent}</td>
-            `;
-            t.appendChild(tr);
-        });
-    });
-}
+        
+        alert("Depozit təsdiqləndi. Kod: " + codeInput + " müştəriyə göndərildi.");
+        row.style.opacity = "0.3";
+        btn.disabled = true;
+    }
 </script>
 
 </body>
