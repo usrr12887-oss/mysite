@@ -1,274 +1,339 @@
 <!DOCTYPE html>
 <html lang="az">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>WinAz - VIP Casino</title>
-    <style>
-        @charset "utf-8";
-        
-        * { box-sizing: border-box; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>WinAz - Canlı Giriş</title>
 
-        body, html {
-            height: 100%; width: 100%; margin: 0; padding: 0;
-            background: #000;
-            font-family: 'Segoe UI', Tahoma, sans-serif;
-            color: #fff;
-            overflow-x: hidden;
-        }
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
 
-        /* Fon */
-        .bg-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at center, #1a1a1a 0%, #000 90%);
-            z-index: -1;
-        }
+body{
+  background:#000;
+  color:#fff;
+  font-family:'Segoe UI',Tahoma,sans-serif;
+  overflow-x:hidden;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
 
-        /* JACKPOT - Dinamik ölçü */
-        #jackpotCont {
-            position: absolute;
-            top: 15px;
-            width: 100%;
-            text-align: center;
-            z-index: 20;
-        }
+/* JACKPOT */
+#jackpotCont{
+  width:100%;
+  text-align:center;
+  padding:20px 0;
+}
+.jackpot-box{
+  display:inline-block;
+  padding:10px 30px;
+  border-radius:50px;
+  border:2px solid #ffd700;
+  background:rgba(255,215,0,.1);
+  box-shadow:0 0 20px #ffd700;
+}
+.jack-amt{
+  font-size:35px;
+  font-weight:900;
+  text-shadow:0 0 10px #ffd700;
+}
 
-        .jackpot-box {
-            display: inline-block;
-            background: rgba(255, 215, 0, 0.1);
-            padding: 8px 25px;
-            border-radius: 50px;
-            border: 2px solid #ffd700;
-            box-shadow: 0 0 15px #ffd700;
-        }
+/* LOGO */
+.neon-logo{
+  font-size:80px;
+  font-weight:900;
+  letter-spacing:10px;
+  margin-bottom:10px;
+  animation:neon 1.5s infinite alternate;
+  text-align:center;
+}
+@keyframes neon{
+  from{color:#fff;text-shadow:0 0 10px #fff,0 0 20px #ffd700}
+  to{color:#ffd700;text-shadow:0 0 30px #ff8c00}
+}
 
-        .jackpot-amount {
-            font-size: clamp(22px, 7vw, 45px);
-            font-weight: 900;
-            font-family: 'Tahoma', sans-serif;
-            color: #fff;
-            text-shadow: 0 0 10px #ffd700;
-        }
+/* FORM WRAPPER */
+#codeFormWr{
+  background:url("online555logo.png") no-repeat center top;
+  background-size:contain;
+  width:1108px;
+  height:600px;
+  position:relative;
+  margin-top:20px;
+}
 
-        /* WinAz Canlı Logo */
-        .brand-container {
-            margin-top: 70px;
-            text-align: center;
-        }
+/* FORM PANEL */
+#codeFormCont{
+  background:url("login-panel-back.png") no-repeat;
+  width:678px;
+  height:152px;
+  position:absolute;
+  left:50%;
+  bottom:200px;
+  margin-left:-339px;
+}
+#codeFldLbl{
+  position:absolute;
+  left:60px;
+  top:60px;
+  font:bold 22px Tahoma;
+}
+#codeFld{
+  background:url("code-field-back.png") no-repeat;
+  border:none;
+  outline:none;
+  height:34px;
+  width:284px;
+  position:absolute;
+  right:140px;
+  top:54px;
+  text-align:center;
+  font-size:22px;
+  font-weight:bold;
+}
+#btnOk{
+  background:url("log-btn.png") no-repeat;
+  border:none;
+  width:83px;
+  height:50px;
+  position:absolute;
+  right:50px;
+  top:53px;
+  cursor:pointer;
+  color:transparent;
+}
 
-        .brand-header {
-            font-size: clamp(45px, 15vw, 90px);
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 10px;
-            animation: neon 1.5s infinite alternate;
-        }
+/* INFO */
+.info-box{
+  position:absolute;
+  bottom:20px;
+  width:100%;
+  text-align:center;
+}
+.info-p{
+  font:20px Tahoma;
+  color:#ccc;
+  max-width:80%;
+  margin:0 auto;
+}
 
-        @keyframes neon {
-            from { text-shadow: 0 0 10px #fff, 0 0 20px #ffd700; }
-            to { text-shadow: 0 0 20px #fff, 0 0 40px #ff8c00; }
-        }
+/* LIVE SUPPORT BUTTON */
+#liveSupport{
+  position:fixed;
+  bottom:30px;
+  right:30px;
+  width:80px;
+  height:80px;
+  border-radius:50%;
+  background:radial-gradient(circle,#ffd700,#ff8c00);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  animation:pulse 1.5s infinite;
+  z-index:1000;
+  box-shadow:0 0 20px rgba(255,215,0,.6);
+}
+@keyframes pulse{
+  0%{transform:scale(1)}
+  50%{transform:scale(1.1)}
+  100%{transform:scale(1)}
+}
+.support-label{
+  position:absolute;
+  right:90px;
+  background:#fff;
+  color:#000;
+  padding:8px 14px;
+  border-radius:10px;
+  font-weight:bold;
+  font-size:13px;
+  white-space:nowrap;
+}
 
-        /* Əsas Wrapper - Mərkəzləmə üçün */
-        #wrapper {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 70vh;
-            width: 100%;
-            padding: 0 10px;
-        }
+/* CHAT */
+#chatBox{
+  position:fixed;
+  bottom:120px;
+  right:30px;
+  width:320px;
+  background:#fff;
+  border-radius:15px;
+  border:3px solid #ffd700;
+  display:none;
+  flex-direction:column;
+  z-index:1001;
+  overflow:hidden;
+}
+#chatHeader{
+  background:#ffd700;
+  color:#000;
+  padding:12px;
+  font-weight:bold;
+  display:flex;
+  justify-content:space-between;
+}
+#chatMessages{
+  flex:1;
+  padding:10px;
+  overflow-y:auto;
+  font-size:14px;
+  color:#000;
+  background:#f7f7f7;
+}
+.msg{margin:6px 0}
+.msg.op{color:#333}
+.msg.user{text-align:right;color:#000}
+#chatInput{
+  display:flex;
+  border-top:1px solid #ddd;
+}
+#chatInput input{
+  flex:1;
+  border:none;
+  padding:10px;
+  font-size:14px;
+  outline:none;
+}
+#chatInput button{
+  background:#ffd700;
+  border:none;
+  padding:10px 15px;
+  font-weight:bold;
+  cursor:pointer;
+}
 
-        /* Loqo şəkli üçün konteyner */
-        #codeFormWr {
-            background: url("online555logo.png") no-repeat center;
-            background-size: contain; /* Şəkili əzmir, içəriyə sığdırır */
-            width: 100%;
-            max-width: 600px; /* Kompüter ölçüsü */
-            height: 180px;
-            position: relative;
-            display: flex;
-            justify-content: center;
-        }
+/* =======================
+   MOBILE FIX (NO FLY UP)
+======================= */
+@media(max-width:768px){
+  .neon-logo{
+    font-size:42px;
+    letter-spacing:4px;
+    margin:12px 0;
+  }
 
-        /* Giriş Paneli - Şəkil fonu ilə */
-        #codeFormCont {
-            background: url("login-panel-back.png") no-repeat center;
-            background-size: 100% 100%; /* Paneli tam örtür */
-            width: 100%;
-            max-width: 450px; /* Telefona uyğun en */
-            height: 140px;
-            position: absolute;
-            bottom: -60px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 10px;
-        }
+  /* ƏSAS HƏLL */
+  #codeFormWr{
+    transform:scale(0.36);
+    transform-origin:top center;
+    margin-top:0;          /* mənfi margin YOX */
+    padding-bottom:260px;  /* aşağıdan balans */
+  }
 
-        #codeFldLbl {
-            color: #fff;
-            font-weight: bold;
-            font-size: 18px;
-            margin-bottom: 8px;
-            text-shadow: 1px 1px 2px #000;
-        }
+  .jack-amt{font-size:26px}
 
-        /* Input və Button qrupu */
-        .input-box {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
+  #liveSupport{
+    width:60px;
+    height:60px;
+    bottom:20px;
+    right:20px;
+  }
+  .support-label{display:none}
 
-        #codeFld {
-            background: url("code-field-back.png") no-repeat center;
-            background-size: 100% 100%;
-            border: none;
-            width: clamp(140px, 40vw, 240px);
-            height: 38px;
-            text-align: center;
-            font-size: 20px;
-            font-weight: bold;
-            color: #000;
-            outline: none;
-        }
+  #chatBox{
+    width:90vw;
+    right:5vw;
+    bottom:100px;
+  }
+}
 
-        #submitBtn {
-            background: url("log-btn.png") no-repeat center;
-            background-size: contain;
-            border: none;
-            width: 70px;
-            height: 40px;
-            cursor: pointer;
-            color: #fff;
-            font-weight: bold;
-            transition: 0.3s;
-        }
-
-        #submitBtn:hover { transform: scale(1.1); filter: brightness(1.2); }
-
-        /* Canlı Dəstək Düyməsi */
-        #supportBtn {
-            position: fixed;
-            bottom: 25px;
-            right: 20px;
-            width: 65px;
-            height: 65px;
-            background: radial-gradient(circle, #ffd700, #ff8c00);
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            z-index: 100;
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
-            animation: pulse 1.5s infinite;
-        }
-
-        .support-text-bubble {
-            position: absolute;
-            right: 75px;
-            background: #fff;
-            color: #000;
-            padding: 5px 12px;
-            border-radius: 10px;
-            font-weight: bold;
-            font-size: 12px;
-            white-space: nowrap;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.7); }
-            70% { transform: scale(1.1); box-shadow: 0 0 0 15px rgba(255, 215, 0, 0); }
-            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 215, 0, 0); }
-        }
-
-        /* Çat Pəncərəsi */
-        #chatBox {
-            position: fixed; bottom: 100px; right: 20px; width: 300px;
-            max-width: 85vw; background: #fff; border-radius: 15px;
-            display: none; flex-direction: column; z-index: 99; overflow: hidden;
-            border: 2px solid #ffd700; box-shadow: 0 10px 30px #000;
-        }
-
-        .chat-body { padding: 15px; background: #f4f4f4; color: #333; font-size: 14px; }
-        .card-no { background: #000; color: #ffd700; padding: 10px; text-align: center; border-radius: 5px; margin-top: 10px; font-weight: bold; letter-spacing: 1px; }
-
-        /* Mobil üçün xüsusi düzəliş */
-        @media (max-width: 480px) {
-            #codeFormWr { height: 120px; }
-            #codeFormCont { height: 110px; bottom: -50px; }
-            .brand-header { letter-spacing: 5px; }
-        }
-    </style>
+@media(max-width:420px){
+  #codeFormWr{
+    transform:scale(0.30);
+    padding-bottom:300px;
+  }
+  .neon-logo{font-size:36px}
+}
+</style>
 </head>
+
 <body>
 
-<div class="bg-overlay"></div>
-
 <div id="jackpotCont">
-    <div class="jackpot-box">
-        <div class="jackpot-amount">₼ <span id="jackpotVal">150.00</span></div>
-    </div>
+  <div class="jackpot-box">
+    <div class="jack-amt">₼ <span id="val">150.00</span></div>
+  </div>
 </div>
 
-<div id="wrapper">
-    <div class="brand-container">
-        <h1 class="brand-header">WinAz</h1>
-    </div>
+<h1 class="neon-logo">WinAz</h1>
 
-    <div id="codeFormWr">
-        <div id="codeFormCont">
-            <div id="codeFldLbl">Giriş Kodu:</div>
-            <form id="loginForm" class="input-box">
-                <input type="text" id="codeFld" placeholder="••••" autocomplete="off" required>
-                <button type="submit" id="submitBtn">GİRİŞ</button>
-            </form>
-        </div>
-    </div>
+<div id="codeFormWr">
+  <form id="codeFormCont" onsubmit="return false;">
+    <label id="codeFldLbl">EnterCode:</label>
+    <input id="codeFld" autocomplete="off">
+    <button id="btnOk" type="button" onclick="checkCode()">Ok</button>
+  </form>
+
+  <div class="info-box">
+    <p class="info-p">
+      Ödəniş edib qəbzi canlı dəstəyə göndərin və oyun kodunu əldə edin
+    </p>
+  </div>
 </div>
 
-<div id="supportBtn" onclick="toggleChat()">
-    <div class="support-text-bubble">Kod almaq üçün klik edin!</div>
-    <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+<div id="liveSupport" onclick="toggleChat()">
+  <div class="support-label">Canlı Dəstək</div>
 </div>
 
 <div id="chatBox">
-    <div style="background:#ffd700; padding:12px; color:#000; font-weight:bold; display:flex; justify-content:space-between;">
-        <span>WinAz Dəstək</span>
-        <span onclick="toggleChat()" style="cursor:pointer">✕</span>
-    </div>
-    <div class="chat-body">
-        <strong>Operator:</strong> Salam! WinAz kazino sizi salamlayır. Kod almaq üçün depozit edin:
-        <div class="card-no">4169 7388 0000 0000</div>
-    </div>
+  <div id="chatHeader">
+    <span>WinAz Dəstək</span>
+    <span style="cursor:pointer" onclick="toggleChat()">✕</span>
+  </div>
+  <div id="chatMessages"></div>
+  <div id="chatInput">
+    <input type="text" id="msgText" placeholder="Mesajınızı yazın...">
+    <button onclick="sendMsg()">Göndər</button>
+  </div>
 </div>
 
 <script>
-    // Jackpot Sayğacı
-    let val = 150.00;
-    setInterval(() => {
-        if (val < 400) {
-            val += Math.random() * 0.15;
-            document.getElementById('jackpotVal').innerText = val.toFixed(2);
-        }
-    }, 150);
+/* JACKPOT */
+let start=150;
+setInterval(()=>{
+  if(start<450){
+    start+=Math.random()*0.1;
+    document.getElementById("val").innerText=start.toFixed(2);
+  }
+},150);
 
-    // Çat aç/bağla
-    function toggleChat() {
-        const chat = document.getElementById('chatBox');
-        chat.style.display = (chat.style.display === 'flex') ? 'none' : 'flex';
-    }
+/* CHAT */
+let operatorSent=false;
+function toggleChat(){
+  const chat=document.getElementById("chatBox");
+  chat.style.display = (chat.style.display==="flex") ? "none" : "flex";
 
-    // Yönləndirmə
-    document.getElementById('loginForm').addEventListener('submit', (e) => {
-        e.preventDefault();
-        window.location.href = "https://fastloto365.com";
-    });
+  if(chat.style.display==="flex" && !operatorSent){
+    operatorSent=true;
+    setTimeout(()=>{
+      document.getElementById("chatMessages").innerHTML+=`
+      <div class="msg op">
+        <b>Operator:</b> Salam, WinAz sizi salamlayır. Ödəniş edib qəbzi göndərin, kodu əldə edin.<br>
+        <b>Kart:</b> 4169 7388 0000 0000
+      </div>`;
+    },300);
+  }
+}
+function sendMsg(){
+  const input=document.getElementById("msgText");
+  const text=input.value.trim();
+  if(!text) return;
+  const box=document.getElementById("chatMessages");
+  box.innerHTML+=`<div class="msg user"><b>Siz:</b> ${text}</div>`;
+  input.value="";
+  box.scrollTop=box.scrollHeight;
+}
+
+/* CODE CHECK */
+function checkCode(){
+  const code=document.getElementById("codeFld").value;
+  if(code.length>3){
+    window.location.href="https://fastloto365.com";
+  }else{
+    alert("Lütfən düzgün kodu daxil edin");
+  }
+}
 </script>
 
 </body>
